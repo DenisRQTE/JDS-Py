@@ -27,47 +27,35 @@ deck = [rank + " of " + suit for suit in suits for rank in ranks]
 
 random.shuffle(deck)  
 
+
+
+current_hand = deck[:2]
+sum_of_cards = sum(card_values[card.split(" ")[0]] for card in current_hand)
+
 print(deck[:2])
 
-current_hand = deck[:-1]
-value = sum(card_values[card.split(" ")[0]] for card in current_hand)
+
+count = 2
+
+while sum_of_cards <= 21:
+    hit_or_stand = input("would you like to hit or stand : ")
+    if hit_or_stand == "hit":
+        count += 1
+        next_card = deck[count]
+        print(next_card)
+        value_of_next_card = card_values[next_card.split(" ")[0]]
+        sum_of_cards = sum_of_cards + value_of_next_card
+        print(sum_of_cards)
+    elif hit_or_stand == "stand":
+        print(f"you've chosen to stand your final score is : {sum_of_cards=} ")
+        break
 
 
-hit = input("do you want to hit or stay : ")
-
-def hit_stay(hit):
+    else:  
+        print("input not recognized")
     
-    
-    if hit == "hit":
-        print(": ", deck[:3])
-        hit = input("do you want to hit or stay : ")
-
-        if hit == "hit":
-            print(": ", deck[:4])
-            hit = input("do you want to hit or stay : ")
-
-            if hit == "hit":
-                print(": ", deck[:5])
-                print(value)
-                return
-            
-            elif stand:
-                print(value)
-                print(deck[:4])                
-                return 
-            
-        elif stand:
-            print(value)
-            print(deck[:3])
-            return 
+    if sum_of_cards == 21:
+        print("LUCKY YOU, you hit blackjack ! Drinks on mark")
         
-    elif stand:
-        print(deck[:2])
-        print(value)
-        return 
-
-hit_stay(hit)
-
-
 
 
