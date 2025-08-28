@@ -25,3 +25,6 @@ class Bank:
     def blackjack(self,):
         self.balance += int(self.current_bet *2.5)
         self.current_bet = 0
+
+
+        
