@@ -67,7 +67,3 @@ def hit_stay(hit):
         return 
 
 hit_stay(hit)
-
-
-
-

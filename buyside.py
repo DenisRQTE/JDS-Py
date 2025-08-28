@@ -11,10 +11,17 @@ class Bank:
             self.balance -= amount
             self.current_bet = amount
     def win(self):
-        self.balance += self.current_bet
+        self.balance += (self.current_bet * 2)
         return f"You've won {self.current_bet}" 
+
     def lose(self):
         return f"You've lost {self.current_bet}"
+        
     def stand_off(self,):
+        self.balance += self.current_bet
+        self.current_bet = 0
         return f"Stand-off, no payout"
+
     def blackjack(self,):
+        self.balance += int(self.current_bet *2.5)
+        self.current_bet = 0
