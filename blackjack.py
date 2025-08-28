@@ -1,4 +1,5 @@
 import random
+from time import sleep
 
 #define cards
 # define card values array dictionnary
@@ -36,61 +37,65 @@ def deal():
 current_hand = []
 current_hand.append(deal())
 current_hand.append(deal())
-score = 0
+
 for card in current_hand:
     print(card["text"], end=" ")
 print()
 
-for card in current_hand:
-    rank=card["rank"]
-    value=CARD_VALUES[rank]
-    if rank == "A":
-        flex_score=score
-        flex_score+=value
-        if flex_score > 21:
-            score+=1
+def calc_score(hand):
+    score=0
+    for card in hand:
+        rank=card["rank"]
+        value=CARD_VALUES[rank]
+        if rank == "A":
+            flex_score=score
+            flex_score+=value
+            if flex_score > 21:
+                score+=1
+            else:
+                score=flex_score
         else:
-            score=flex_score
-    else:
-        score+=value
+            score+=value
+            
+    return score
+
+def show_hand():
+    for card in current_hand:
+        print(card["text"], end=" ")
+    print()
+    return
+    
+            
+score = calc_score(current_hand)            
             
 print(f"Current score: {score}")
 
-"""
-hit = input("do you want to hit or stay : ")
+def hit_stay():
+    hit = input("do you want to hit or stay : ")
+    return hit
 
-
-def hit_stay(hit):
-    
-    
-    if hit == "hit":
-        print(": ", deck[:3])
-        hit = input("do you want to hit or stay : ")
-
-        if hit == "hit":
-            print(": ", deck[:4])
-            hit = input("do you want to hit or stay : ")
-
-            if hit == "hit":
-                print(": ", deck[:5])
-                print(value)
-                return
+while True:
+    # Checks to see if initial win condition is met
+    if calc_score(current_hand) == 21:
+        print("BLACKJACK! YOU WIN!")
+        break
+    # Hits and calculates score, then checks score 
+    else:
+        play = hit_stay()
+        if play == "hit":
+            current_hand.append(deal())
+            show_hand()
+            score=calc_score(current_hand)
             
-            elif stand:
-                print(value)
-                print(deck[:4])                
-                return 
-            
-        elif stand:
-            print(value)
-            print(deck[:3])
-            return 
-        
-    elif stand:
-        print(deck[:2])
-        print(value)
-        return 
-
-hit_stay(hit) 
-
-"""
+            if score > 21: # If score is more than 21, players busts
+                print("BUST! YOU LOSE")
+                break
+            else:
+                print(f"Current Score: {score}")
+        # elif is used to specify "stay" as input value        
+        elif play == "stay":
+            score=calc_score
+            print(f"Current Score: {score}")
+            break
+        else: 
+            print("Try Again") # Better error-checking should go here.
