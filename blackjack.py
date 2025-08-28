@@ -42,6 +42,16 @@ for card in current_hand:
     print(card["text"], end=" ")
 print()
 
+def play():
+    hit_opts = ["h", "hit"]
+    stand_opts = ["s", "stand", "stay"]
+    user_play = input("do you want to hit or stand : ").lower()
+    if user_play in hit_opts:
+        play = "hit"
+    elif user_play in stand_opts:
+        play = "stand"
+    return play
+
 def calc_score(hand):
     score=0
     for card in hand:
@@ -70,20 +80,25 @@ score = calc_score(current_hand)
             
 print(f"Current score: {score}")
 
-def hit_stay():
-    hit = input("do you want to hit or stay : ")
-    return hit
+def play():
+    hit_opts = ["h", "hit"]
+    stand_opts = ["s", "stand", "stay"]
+    user_play = input("do you want to hit or stand : ").lower()
+    if user_play in hit_opts:
+        play = "hit"
+    elif user_play in stand_opts:
+        play = "stand"
+    return play
 
 while True:
     # Checks to see if initial win condition is met
     if calc_score(current_hand) == 21:
         print("BLACKJACK! YOU WIN!")
         break
-    
     else:
-        play = hit_stay()
+        userPlay = play()
         # Hits and calculates score, then checks score 
-        if play == "hit":
+        if userPlay == "hit":
             current_hand.append(deal())
             show_hand()
             score=calc_score(current_hand)
@@ -94,7 +109,7 @@ while True:
             else:
                 print(f"Current Score: {score}")
         # elif is used to specify "stay" as input value        
-        elif play == "stay":
+        elif userPlay == "stand":
             score=calc_score(current_hand)
             print(f"Current Score: {score}")
             break
