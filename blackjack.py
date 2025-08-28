@@ -56,9 +56,10 @@ for card in current_hand:
             
 print(f"Current score: {score}")
 
+"""
 hit = input("do you want to hit or stay : ")
 
-"""
+
 def hit_stay(hit):
     
     
