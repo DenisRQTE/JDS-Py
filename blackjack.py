@@ -79,9 +79,10 @@ while True:
     if calc_score(current_hand) == 21:
         print("BLACKJACK! YOU WIN!")
         break
-    # Hits and calculates score, then checks score 
+    
     else:
         play = hit_stay()
+        # Hits and calculates score, then checks score 
         if play == "hit":
             current_hand.append(deal())
             show_hand()
@@ -94,7 +95,7 @@ while True:
                 print(f"Current Score: {score}")
         # elif is used to specify "stay" as input value        
         elif play == "stay":
-            score=calc_score
+            score=calc_score(current_hand)
             print(f"Current Score: {score}")
             break
         else: 
