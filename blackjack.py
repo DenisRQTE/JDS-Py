@@ -53,11 +53,13 @@ def play():
     return play
 
 def calc_score(hand):
-    score=0
+    score = 0
+    ace_count = 0
     for card in hand:
         rank=card["rank"]
         value=CARD_VALUES[rank]
-        if rank == "A":
+        if rank == "A": 
+            ace_count+=1
             flex_score=score
             flex_score+=value
             if flex_score > 21:
@@ -66,6 +68,10 @@ def calc_score(hand):
                 score=flex_score
         else:
             score+=value
+        if ace_count > 0:
+            if score > 21:
+                score-=10
+                ace_count-=1    
             
     return score
 
@@ -90,6 +96,7 @@ def play():
         play = "stand"
     return play
 
+
 while True:
     # Checks to see if initial win condition is met
     if calc_score(current_hand) == 21:
@@ -102,8 +109,9 @@ while True:
             current_hand.append(deal())
             show_hand()
             score=calc_score(current_hand)
-            
-            if score > 21: # If score is more than 21, players busts
+        
+            if score > 21:
+                # If score is more than 21, players busts
                 print("BUST! YOU LOSE")
                 break
             else:
