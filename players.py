@@ -19,3 +19,13 @@ class Dealer(Player):
 class User(Player):
     def __init__(self, score=0, hand = None):
         super().__init__(score, hand)
+
+    def play(self):
+        hit_opts = ["h", "hit"]
+        stand_opts = ["s", "stand", "stay"]
+        user_play = input("do you want to hit or stand : ").lower()
+        if user_play in hit_opts:
+            play = "hit"
+        elif user_play in stand_opts:
+            play = "stand"
+        return play

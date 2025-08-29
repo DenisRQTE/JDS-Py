@@ -11,15 +11,9 @@ from players import User, Dealer
 # A= 1-11
 # Anouncing winner
 # banking system
-
-
-stand = "stand"
-
-
+ 
 SUITS = ["Hearts", "Diamonds", "Clubs", "Spades"]
 RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-
-
 CARD_VALUES = {
     "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10,
     "J": 10, "Q": 10, "K": 10, "A": 11  
@@ -44,15 +38,7 @@ for card in current_hand:
     print(card["text"], end=" ")
 print()
 
-def play():
-    hit_opts = ["h", "hit"]
-    stand_opts = ["s", "stand", "stay"]
-    user_play = input("do you want to hit or stand : ").lower()
-    if user_play in hit_opts:
-        play = "hit"
-    elif user_play in stand_opts:
-        play = "stand"
-    return play
+
 
 def calc_score(hand):
     score = 0
@@ -88,16 +74,6 @@ score = calc_score(current_hand)
             
 print(f"Current score: {score}")
 
-def play():
-    hit_opts = ["h", "hit"]
-    stand_opts = ["s", "stand", "stay"]
-    user_play = input("do you want to hit or stand : ").lower()
-    if user_play in hit_opts:
-        play = "hit"
-    elif user_play in stand_opts:
-        play = "stand"
-    return play
-
 
 while True:
     # Checks to see if initial win condition is met
@@ -105,7 +81,7 @@ while True:
         print("BLACKJACK! YOU WIN!")
         break
     else:
-        userPlay = play()
+        userPlay = player.play()
         # Hits and calculates score, then checks score 
         if userPlay == "hit":
             current_hand.append(dealer.deal(deck))
