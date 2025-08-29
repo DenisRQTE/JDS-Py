@@ -8,6 +8,12 @@ class Player:
         self.score = score
         self.playerNum = Player.playerNum
         Player.playerNum += 1
+        
+    def show_hand(self):
+        for card in self.hand:
+            print(card["text"], end=" ")
+        print()
+        return
 
 class Dealer(Player):
     def __init__(self, score=0, hand = None):
