@@ -35,3 +35,5 @@ class User(Player):
         elif user_play in stand_opts:
             play = "stand"
         return play
+
+        
