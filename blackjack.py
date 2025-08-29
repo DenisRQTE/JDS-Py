@@ -1,5 +1,6 @@
 import random
 from time import sleep
+from players import User, Dealer
 
 #define cards
 # define card values array dictionnary
@@ -31,12 +32,13 @@ deck = [{"suit": suit,
 
 random.shuffle(deck)
 
-def deal():
-    return deck.pop() 
 
-current_hand = []
-current_hand.append(deal())
-current_hand.append(deal())
+dealer = Dealer()
+player = User()
+current_hand = player.hand
+current_hand.append(dealer.deal(deck))
+current_hand.append(dealer.deal(deck))
+
 
 for card in current_hand:
     print(card["text"], end=" ")
@@ -106,7 +108,7 @@ while True:
         userPlay = play()
         # Hits and calculates score, then checks score 
         if userPlay == "hit":
-            current_hand.append(deal())
+            current_hand.append(dealer.deal(deck))
             show_hand()
             score=calc_score(current_hand)
         
