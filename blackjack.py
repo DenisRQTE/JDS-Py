@@ -1,7 +1,7 @@
 import random
 from time import sleep
 from players import User, Dealer
-from helpers import calc_score, SUITS, RANKS, deck
+from helpers import calc_score, SUITS, RANKS
 #define cards
 # define card values array dictionnary
 # deal cards arrray
@@ -11,6 +11,11 @@ from helpers import calc_score, SUITS, RANKS, deck
 # A= 1-11
 # Anouncing winner
 # banking system
+ 
+deck = [{"suit": suit, 
+         "rank": rank, 
+         "text":"| " + rank + " of " + suit + " |" } 
+         for suit in SUITS for rank in RANKS]
 
 random.shuffle(deck)
 

@@ -5,11 +5,6 @@ CARD_VALUES = {
     "J": 10, "Q": 10, "K": 10, "A": 11  
 }
 
-deck = [{"suit": suit, 
-         "rank": rank, 
-         "text":"| " + rank + " of " + suit + " |" } 
-         for suit in SUITS for rank in RANKS]
-
 def calc_score(hand):
     score = 0
     ace_count = 0
