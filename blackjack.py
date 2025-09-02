@@ -17,45 +17,37 @@ deck = [{"suit": suit,
          "text":"| " + rank + " of " + suit + " |" } 
          for suit in SUITS for rank in RANKS]
 
-random.shuffle(deck)
+random.shuffle(deck)  
 
 
-dealer = Dealer()
-player = User()
-current_hand = player.hand
-current_hand.append(dealer.deal(deck))
-current_hand.append(dealer.deal(deck))
 
-player.show_hand()
-            
-score = calc_score(current_hand)            
-            
-print(f"Current score: {score}")
+current_hand = deck[:2]
+sum_of_cards = sum(card_values[card.split(" ")[0]] for card in current_hand)
+
+print(deck[:2])
 
 
-while True:
-    # Checks to see if initial win condition is met
-    if calc_score(current_hand) == 21:
-        print("BLACKJACK! YOU WIN!")
+count = 2
+
+while sum_of_cards <= 21:
+    hit_or_stand = input("would you like to hit or stand : ")
+    if hit_or_stand == "hit":
+        count += 1
+        next_card = deck[count]
+        print(next_card)
+        value_of_next_card = card_values[next_card.split(" ")[0]]
+        sum_of_cards = sum_of_cards + value_of_next_card
+        print(sum_of_cards)
+    elif hit_or_stand == "stand":
+        print(f"you've chosen to stand your final score is : {sum_of_cards=} ")
         break
-    else:
-        userPlay = player.play()
-        # Hits and calculates score, then checks score 
-        if userPlay == "hit":
-            current_hand.append(dealer.deal(deck))
-            player.show_hand()
-            score=calc_score(current_hand)
+
+
+    else:  
+        print("input not recognized")
+    
+    if sum_of_cards == 21:
+        print("LUCKY YOU, you hit blackjack ! Drinks on mark")
         
-            if score > 21:
-                # If score is more than 21, players busts
-                print("BUST! YOU LOSE")
-                break
-            else:
-                print(f"Current Score: {score}")
-        # elif is used to specify "stay" as input value        
-        elif userPlay == "stand":
-            score=calc_score(current_hand)
-            print(f"Current Score: {score}")
-            break
-        else: 
-            print("Try Again") # Better error-checking should go here.
+
+
